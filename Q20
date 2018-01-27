@@ -1,0 +1,204 @@
+  
+201  Q20.CPP
+@@ -1,201 +0,0 @@
+ -#include<conio.h>
+ -#include<process.h>
+ -#include<iostream.h>
+ -#include<string.h>
+ -#include<fstream.h>
+ -class emp
+ -{
+ -char emp_name[30], emp_desig[10];
+ -int emp_code, emp_salary;
+ -
+ -	void showname()
+ -	{
+ -	clrscr();
+ -	 fstream fs;
+ - fs.open("emp.txt",ios::in);
+ - while( fs.read((char*)this,sizeof(*this)))
+ - {
+ -	cout<<"\nName: "<<emp_name;
+ -
+ - }
+ - fs.close();
+ -     getch();
+ -	}
+ -
+ -	void showlist()
+ -	{
+ -	       clrscr();
+ -	 fstream fs;
+ - fs.open("emp.txt",ios::in);
+ -	 while( fs.read((char*)this,sizeof(*this)))
+ -	{
+ -	if(emp_salary>20000)
+ -		cout<<endl<<emp_name;
+ -	}
+ -	fs.close();
+ -	 getch();
+ -	}
+ -
+ -       void showuser()
+ -       {
+ -       fstream fs;
+ -       fs.open("emp.txt",ios::in);
+ -       fs.close();
+ -	fs.open("emp.txt",ios::in);
+ -
+ -	 char c='a';
+ -
+ - while(c!=' ')
+ -{
+ -cout<<"1.Search By name\n";
+ -cout<<"2.Search By Code:";
+ -cout<<"\n3.Search by Designation:";
+ -cout<<"\n SPACE TO GO BACK" ;
+ -cout<<"\nENTER : ";
+ -c=getche();
+ - switch(c)
+ - {
+ -	case '1': char name[30];
+ -		  cout<<"Enter name:" ;
+ -		  cin>>name;
+ -			while( fs.read((char*)this,sizeof(*this) ))
+ -			{
+ -				if(strcmp(name,emp_name)==0)
+ -				   {
+ -				    cout<<emp_name;
+ -				    cout<<endl<<emp_salary;
+ -				    cout<<endl<<emp_desig;
+ -				    cout<<endl<<emp_code;
+ -				    return  ;
+ -				   }
+ -			}
+ -			break;
+ -	case '2':         int c;
+ -		  cout<<"Enter Code:" ;
+ -		  cin>>c;
+ -			while( fs.read((char*)this,sizeof(*this)) )
+ -			{
+ -				if(c==emp_code)
+ -				   {
+ -				    cout<<emp_name;
+ -				    cout<<endl<<emp_salary;
+ -				    cout<<endl<<emp_desig;
+ -				    cout<<endl<<emp_code;
+ -				    return ;
+ -				   }
+ -			}
+ -			break;
+ -	case '3': char des[30];
+ -		  cout<<"Enter Designation:" ;
+ -		  cin>>des;
+ -			while( fs.read((char*)this,sizeof(*this)) )
+ -			{
+ -				if(strcmp(des,emp_desig)==0)
+ -				   {
+ -				   cout<<"********\n";
+ -				    cout<<endl<<emp_name;
+ -				    cout<<endl<<emp_desig;
+ -				    cout<<endl<<emp_code;
+ -
+ -				    }
+ -			}
+ -			break;
+ -	case ' ':return;
+ -		break;
+ -	case 'x':exit(0);
+ -
+ - }
+ - getch();
+ -       }
+ - }
+ -public:
+ -void getemp()
+ -{
+ -    fstream fs;
+ -    fs.open("emp.txt",ios::app);
+ -    cout<<"Enter name:";
+ -    cin>>emp_name;
+ -    cout<<"Code:";
+ -    cin>>emp_code;
+ -    cout<<"SALARy:";
+ -    cin>>emp_salary;
+ -    cout<<"Designation:";
+ -    cin>>emp_desig;
+ -
+ -    fs.write((char*)this,sizeof(*this));
+ -    fs.close();
+ -}
+ -void show ()
+ -{
+ -	fstream fs;
+ -	int code;
+ -	cout<<"Enter Employee code  to Find:" ;
+ -	cin>>code;
+ -
+ -	fs.open("emp.txt",ios::in);
+ -       while(fs.read((char*)this,sizeof(*this)))
+ -       {
+ -		if(code==emp_code)
+ -		{
+ -			clrscr();
+ -			cout<<"Name:\t"<<emp_name;
+ -			cout<<"\nCode:\t"<<emp_code;
+ -			cout<<"\nDesignation:\t"<<emp_desig;
+ -			cout<<"\nSlary:\t"<<emp_salary;
+ -			return ;
+ -		}
+ -
+ -       }
+ -       cout<<"NOT FOUND:";
+ -}
+ -
+ -void displaylist()
+ -{
+ -   char c='a';
+ -
+ - while(c!=' ')
+ -{
+ -cout<<"1.Name of all employees:\n";
+ -cout<<"2.List of Employees whose salary is <20000:";
+ -cout<<"\n3.Your choice by name,designation or salary";
+ -cout<<"\n SPACE TO GO BACK";
+ -cout<<"\nENTER : ";
+ -c=getche();
+ -switch(c)
+ -{
+ -case '1': showname(); break;
+ -case '2': showlist();break;
+ -case '3': showuser() ;break;
+ -case ' ': return;
+ -}
+ -getch();
+ -}
+ -}
+ -};
+ -
+ -void main()
+ -{
+ -emp e;
+ -
+ -char c='a';
+ -while(c!=' ')
+ -{
+ -clrscr();
+ -cout<<"1.Enter the Emp details:\n";
+ -cout<<"2.Show Emp Details:";
+ -cout<<"\n3.List emp";
+ -cout<<"\nENTER : ";
+ -c=getche();
+ -switch(c)
+ -{
+ -case '1': e.getemp();break;
+ -case '2': e.show();break;
+ -case '3':e.displaylist();break;
+ -case ' ':
+ -default: exit(0);
+ -}
+ -getch();
+ -}
+ -
+ -
+ -} 
